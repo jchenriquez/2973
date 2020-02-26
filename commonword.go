@@ -1,6 +1,8 @@
 package mostcommonword
 
-import "fmt"
+import ("fmt"
+"unicode"
+)
 
 func MostCommonWord(paragraph string, banned []string) string {
   wordEndings := map[byte]bool {
@@ -28,7 +30,6 @@ func MostCommonWord(paragraph string, banned []string) string {
     letter := paragraph[i]
 
     if _, wordEnded := wordEndings[letter]; wordEnded {
-
       if _, baned := bannedLkup[currWord]; len(currWord) > 0 && !baned {
         wordCount := wordsCount[currWord]
         wordsCount[currWord] = wordCount+1
@@ -42,7 +43,7 @@ func MostCommonWord(paragraph string, banned []string) string {
 
       currWord = ""
     } else {
-     currWord = fmt.Sprintf("%s%c", currWord, letter)
+     currWord = fmt.Sprintf("%s%c", currWord, unicode.Lower(letter))
     }
   }
 
